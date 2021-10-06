@@ -1,7 +1,7 @@
 # Reactnative Assignment
 
 # Date: 1 Oct 2021
-#Task: 
+# Task: 
 Ceate a Counter Application which Increments Counter on Click of a Button.
 Parent will be class component and child will be functional component.
 
