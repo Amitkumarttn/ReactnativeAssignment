@@ -1,3 +1,6 @@
+# Counter Application which Increments Counter on Click of a Button.
+# Parent will be class component and child will be Functional component.
+
 # lifecycle  
 Life Cycle in React native Class Component;
 
