@@ -29,3 +29,12 @@ Task 2: Create a text input , text and view alongwith the following steps:-
      
      
 Task 3: Create a image view and show activity indicator in place of image while it is loaded.
+
+     
+# Date: 7 Oct 2021
+     
+     Task: Create a new Screen 
+
+          Add a button FETCH Data
+          On click present a loader and make an API call 
+          List the data on the same screen, existing button and loader should be removed
