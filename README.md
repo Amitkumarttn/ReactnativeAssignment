@@ -41,3 +41,4 @@
           ‣ Add a button FETCH Data
           ‣ On click present a loader and make an API call 
           ‣ List the data on the same screen, existing button and loader should be removed
+          * I have done this with both Class Component and Functional Component
