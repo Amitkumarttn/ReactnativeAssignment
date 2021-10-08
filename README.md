@@ -42,3 +42,10 @@
           ‣ On click present a loader and make an API call 
           ‣ List the data on the same screen, existing button and loader should be removed
           * I have done this with both Class Component and Functional Component
+          
+          
+# Date: 8 Oct 2021
+     Task : Create a following 
+     
+          ‣ Create Stack, Tab and Drawer Navigator (optional)
+          ‣ Pass Props and Set it as header title
