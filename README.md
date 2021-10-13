@@ -70,4 +70,6 @@
          ‣ Sort, filter, wishlist should be touchable
          ‣ No need for back icon
      
-          
+
+# Date: 13 Oct 2021
+     Task: Create a sectionlist with the given object.
