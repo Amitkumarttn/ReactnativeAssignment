@@ -2,8 +2,8 @@
     
  # Expected Screenshot
  
- 
- ![IMG_117BBFD6C489-1](https://user-images.githubusercontent.com/90309641/137110227-85825ef4-683a-4497-936d-8774c2912887.jpeg)
+ ![imgonline-com-ua-resize-448T5LCfcBVxt](https://user-images.githubusercontent.com/90309641/137110912-422a2807-ddef-48dc-9169-5c7fd0f85524.jpg)
+
  
  
  
@@ -15,7 +15,8 @@
  
  # Android
     
-![android](https://user-images.githubusercontent.com/90309641/137109988-161e30e7-f839-475e-9508-33c761b00695.png)
+![imgonline-com-ua-resize-Dar43Rjwh5eav](https://user-images.githubusercontent.com/90309641/137111038-5f9644c0-e996-4549-9280-48e5f59546c6.jpg)
+
 
 
 
@@ -24,4 +25,4 @@
  # IOS
  
  
-![iphone](https://user-images.githubusercontent.com/90309641/137110022-3c02a17f-3bdb-41a7-9c56-4847ec51f093.png)
+![imgonline-com-ua-resize-5ac9zradM0t5ALOR](https://user-images.githubusercontent.com/90309641/137111122-f86d94bc-393d-416f-8b32-a69a59794b99.jpg)
