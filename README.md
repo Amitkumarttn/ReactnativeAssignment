@@ -73,3 +73,9 @@
 
 # Date: 13 Oct 2021
      Task: Create a sectionlist with the given object.
+     
+     
+# Date: 14 Oct 2021
+     Task: 
+          Use Alert, intercept Back Press and show the text to confirm go back.
+          Use Clipboard to move text from one screen to another.
