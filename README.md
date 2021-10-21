@@ -79,3 +79,15 @@
      Task: 
           Use Alert, intercept Back Press and show the text to confirm go back.
           Use Clipboard to move text from one screen to another.
+          
+          
+          
+# Date: 20 Oct 2021
+     Task:
+          Create a draggable ball as per demonstrated in the attached link
+          https://drive.google.com/file/d/1Lb53IDtVZg49MsaY1ZEX_HBJWBLhfHmD/view?usp=sharing
+
+               Create a map view
+                    1.  Show your current location 
+                    2. Set your current location on drag i.e,  current location functionality in zomato application.
+                    3. Create an array of some static coordinates and show marker for those coordinates on map view.
