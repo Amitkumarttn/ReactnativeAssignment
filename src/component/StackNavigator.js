@@ -12,6 +12,29 @@ import {ExitIcon} from '../constant/icons';
 const Stack = createNativeStackNavigator();
 
 export default class StackNavigator extends Component {
+  Logout_action = navigation => {
+    Alert.alert('Hold on!', 'Are you sure you want to logout?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: () => {
+          try {
+            AsyncStorageData.clear();
+          } catch (e) {
+            console.log(e);
+          }
+          console.log('Logout Successfully');
+          Alert.alert('Successful', 'Logout Successful');
+          navigation.navigate('Signup');
+        },
+      },
+    ]);
+    return true;
+  };
   render() {
     return (
       <NavigationContainer>
@@ -29,33 +52,7 @@ export default class StackNavigator extends Component {
               headerTitleAlign: 'center',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => {
-                    Alert.alert(
-                      'Hold on!',
-                      'Are you sure you want to logout?',
-                      [
-                        {
-                          text: 'Cancel',
-                          onPress: () => null,
-                          style: 'cancel',
-                        },
-                        {
-                          text: 'Yes',
-                          onPress: () => {
-                            try {
-                              AsyncStorageData.clear();
-                            } catch (e) {
-                              console.log(e);
-                            }
-                            console.log('Logout Successfully');
-                            Alert.alert('Successful', 'Logout Successful');
-                            navigation.navigate('Signup');
-                          },
-                        },
-                      ],
-                    );
-                    return true;
-                  }}>
+                  onPress={() => this.Logout_action(navigation)}>
                   <Image style={styles.icons} source={ExitIcon} />
                 </TouchableOpacity>
               ),
@@ -72,8 +69,5 @@ const styles = StyleSheet.create({
   icons: {
     height: 20,
     width: 20,
-  },
-  back: {
-    color: '#fff',
   },
 });

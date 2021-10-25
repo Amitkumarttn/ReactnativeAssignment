@@ -12,8 +12,8 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <View style={styles.userContainer}>
           <Image style={styles.user} source={UserIcon} />
-          <Text style={styles.name}>Hi {JSON.stringify(user_name)}</Text>
-          <Text style={styles.email}>{JSON.stringify(email_id)}</Text>
+          <Text>{JSON.stringify(user_name)}</Text>
+          <Text>{JSON.stringify(email_id)}</Text>
         </View>
       </View>
     );

@@ -7,8 +7,11 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  KeyboardAvoidingView,
   SafeAreaView,
+  Platform,
   Alert,
+  ScrollView,
 } from 'react-native';
 
 import AsyncStorageData from '@react-native-async-storage/async-storage';
@@ -17,6 +20,7 @@ const {height, width} = Dimensions.get('window');
 
 //Importing Icons
 import {UserIcon, MailIcon, LockIcon, PhoneIcon} from '../constant/icons';
+import {HomeScreen} from '.';
 
 export default class SignupScreen extends React.Component {
   state = {
@@ -73,6 +77,13 @@ export default class SignupScreen extends React.Component {
         user_name: USER_DATA.name,
         email_id: USER_DATA.email,
       });
+      this.setState({
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        Repassword: '',
+      });
     }
   };
 
@@ -89,8 +100,13 @@ export default class SignupScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <SafeAreaView style={styles.container2}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+        style={styles.container}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.container2}>
           <Text style={styles.heading}>Let's Get Started!</Text>
           <Text style={styles.subheading}>
             Create an account to Q Allure to get all features
@@ -102,7 +118,6 @@ export default class SignupScreen extends React.Component {
               <TextInput
                 onBlur={() => this.onBlur()}
                 onFocus={() => this.onFocus()}
-                clearButtonMode="always"
                 style={[
                   styles.TextInputContainer,
                   {
@@ -122,7 +137,6 @@ export default class SignupScreen extends React.Component {
             <View style={styles.InputContainer}>
               <Image style={styles.icons} source={MailIcon} />
               <TextInput
-                clearButtonMode="always"
                 style={styles.TextInputContainer}
                 placeholder="Email"
                 value={this.state.email}
@@ -135,7 +149,6 @@ export default class SignupScreen extends React.Component {
             <View style={styles.InputContainer}>
               <Image style={styles.icons} source={PhoneIcon} />
               <TextInput
-                clearButtonMode="always"
                 style={styles.TextInputContainer}
                 placeholder="Phone"
                 keyboardType="number-pad"
@@ -149,7 +162,6 @@ export default class SignupScreen extends React.Component {
             <View style={styles.InputContainer}>
               <Image style={styles.icons} source={LockIcon} />
               <TextInput
-                clearButtonMode="always"
                 secureTextEntry={true}
                 style={styles.TextInputContainer}
                 placeholder="Password"
@@ -163,7 +175,6 @@ export default class SignupScreen extends React.Component {
             <View style={styles.InputContainer}>
               <Image style={styles.icons} source={LockIcon} />
               <TextInput
-                clearButtonMode="always"
                 secureTextEntry={true}
                 style={styles.TextInputContainer}
                 placeholder="Confirm Password"
@@ -185,8 +196,8 @@ export default class SignupScreen extends React.Component {
               <Text style={styles.loginTxt}>Login here</Text>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -199,18 +210,19 @@ const styles = StyleSheet.create({
   },
   container2: {
     flex: 1,
-    alignItems: 'center',
   },
   heading: {
     marginTop: 80,
     fontSize: 22,
     fontWeight: 'bold',
+    alignSelf: 'center',
   },
   subheading: {
     fontSize: 14,
     color: '#888',
     marginVertical: 5,
     marginBottom: 40,
+    alignSelf: 'center',
   },
   icons: {
     width: 20,
@@ -239,6 +251,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
   },
   Btn: {
     color: '#fff',
@@ -248,6 +261,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
     marginVertical: 75,
+    alignSelf: 'center',
   },
   info: {
     fontWeight: '500',
