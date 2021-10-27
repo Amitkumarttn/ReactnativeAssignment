@@ -106,3 +106,12 @@
 
 
 
+
+# Date 26 Oct 2021
+
+     Task
+          - Create a Basic Counter App using Redux
+
+          - App should have the ability to increment and decrement the counter.
+
+          - Use Class Components Only.
