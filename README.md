@@ -5,4 +5,5 @@
 
 
 
-![Uploading Simulator Screen Shot - iPhone 13 - 2021-10-27 at 11.06.34.png…]()
+![Simulator Screen Shot - iPhone 13 - 2021-10-27 at 11 06 34](https://user-images.githubusercontent.com/90309641/139006119-11fe2cd6-cd7d-4619-a6d8-c1f7163d74ab.png)
+
