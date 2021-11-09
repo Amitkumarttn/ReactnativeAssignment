@@ -130,3 +130,27 @@
           - Create an action to update an item inside of the data array which has been stored inside of the redux store.
 
           - The changes should reflect on the Home Screen List item, which has been updated.
+          
+          
+ # Date 3 Nov 2021
+     Task
+          1. Make two screens 
+
+          Notes List Screen (Where all the Notes added will be displayed)
+          Add/Edit Notes Screen (Where user will add a new note or edit already added notes)
+          Use Stack Navigator for Navigation
+          2. Use Mobx for state management
+          3. By clicking add notes user will be able to add a new note and that note will be displayed on the Notes List Screen
+          4. By Pressing any note on Notes List screen user will be able to edit and update that note on Add/Edit Note Screen
+          5. By Long Pressing any note user will get alert to delete that particular not
+
+          Screen example : 
+          https://drive.google.com/file/d/10SZ-HCJ9lXfzGnF0MITxfz_mAEnEXFdF/view
+
+
+# Date 9 Nov 2021
+     Task
+          Create Three Screens 
+               1. Video Player Screen demonstrating Video Player Functionality with progress, pause/play 
+               2. Audio Player Screen. Create a Player with pause/play, next/previous functionality
+               3. Use Geolocation to fetch user's current location and show marker on the map and any change in user's location should also reflect on the map
