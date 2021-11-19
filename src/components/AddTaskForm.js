@@ -25,9 +25,9 @@ function AddTaskForm({onSubmit, navigation}) {
 
   const handleSubmit = () => {
     const alphabetOnly = /[^a-zA-Z]/;
-    if (name.length == '' || designation.length == '' || salary.length == '') {
+    if (name === '' || designation === '' || salary === '') {
       Alert.alert('Information', 'Please fill all fields');
-    } else if (empId.length == '') {
+    } else if (empId === '') {
       Alert.alert('Information', 'Please fill all fields');
     } else if (isNaN(empId)) {
       Alert.alert('Invalid ID', 'contain only number');
@@ -37,10 +37,11 @@ function AddTaskForm({onSubmit, navigation}) {
       Alert.alert('Invalid Designation', 'contain only alphabets');
     } else if (isNaN(salary)) {
       Alert.alert('Invalid Salary', 'contain only number');
-    } else if (salary.length > 500001) {
+    } else if (salary > 500000) {
       Alert.alert('Limit Exceed', 'range should not exceed 5,00,000');
     } else {
       onSubmit(empId, name, designation, salary);
+      navigation.navigate('List');
       setEmpId('');
       setName('');
       setDesignation('');

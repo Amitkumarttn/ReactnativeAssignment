@@ -76,7 +76,7 @@ function AddScreen({navigation}) {
   );
   return (
     <View style={styles.container}>
-      <AddTaskForm onSubmit={handleAddTask} />
+      <AddTaskForm onSubmit={handleAddTask} navigation={navigation} />
     </View>
   );
 }

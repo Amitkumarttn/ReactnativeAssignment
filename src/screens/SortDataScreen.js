@@ -1,5 +1,12 @@
 import React, {useState, useEffect, useRef, useCallback} from 'react';
-import {View, Text, FlatList, StyleSheet, SafeAreaView, StatusBar} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import Realm from 'realm';
 import Task from '../models/Task';
 const Item = ({empId, name, designation, salary}) => (
@@ -83,7 +90,7 @@ function SortDataScreen({navigation}) {
     <View style={styles.container}>
       {sortarray.length === 0 ? (
         <View style={styles.headingContainer}>
-          <Text style={styles.heading}>Nothing here, First new Data</Text>
+          <Text style={styles.heading}>Nothing here, First add new Data</Text>
         </View>
       ) : (
         <SafeAreaView style={styles.container2}>
