@@ -5,14 +5,27 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorageData from '@react-native-async-storage/async-storage';
 
 //Importing Screens
-import {SignupScreen, HomeScreen} from '../screens';
+import {SignupScreen, HomeScreen, SplashScreen} from '../screens';
 //Importing Icons
 import {ExitIcon} from '../constant/icons';
 
 const Stack = createNativeStackNavigator();
 
 export default class StackNavigator extends Component {
-  Logout_action = navigation => {
+  state = {
+    data: null,
+  };
+  async componentDidMount() {
+    // const user = await AsyncStorageData.getItem('UserValue');
+    // const users = JSON.parse(user);
+    // this.setState({
+    //   data: users,
+    // });
+    // console.log('USERS', users);
+    // console.log('User Data===', this.state.data);
+    // this.state.data === null ? alert('Signup') : alert('Home');
+  }
+  logoutAction = navigation => {
     Alert.alert('Hold on!', 'Are you sure you want to logout?', [
       {
         text: 'Cancel',
@@ -38,7 +51,14 @@ export default class StackNavigator extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Splash"
+            component={SplashScreen}
+          />
           <Stack.Screen
             options={{
               headerShown: false,
@@ -51,8 +71,7 @@ export default class StackNavigator extends Component {
               headerBackVisible: false,
               headerTitleAlign: 'center',
               headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => this.Logout_action(navigation)}>
+                <TouchableOpacity onPress={() => this.logoutAction(navigation)}>
                   <Image style={styles.icons} source={ExitIcon} />
                 </TouchableOpacity>
               ),

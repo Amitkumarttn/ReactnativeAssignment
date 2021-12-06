@@ -13,6 +13,28 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
+// const {name, email, phone, password, Repassword} = this.state;
+
+// const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+// if (
+//   name.length === '' ||
+//   email.length === '' ||
+//   phone.length === '' ||
+//   password.length === '' ||
+//   Repassword.length === ''
+// ) {
+//   Alert.alert('Information!', 'Please fill all fields');
+// } else if (reg.test(email) === false) {
+//   Alert.alert('Information!', 'Email ID is not Valid');
+// } else if (phone.length != 10) {
+//   Alert.alert('Information!', 'Invalid Mobile Number');
+// } else if (password.length <= 8) {
+//   Alert.alert('Information!', 'Password must be 8 Character Long');
+// } else if (password !== Repassword) {
+//   Alert.alert('Information!', 'Password Do not Match');
+// } else {
+
+// }
 
 import AsyncStorageData from '@react-native-async-storage/async-storage';
 
@@ -20,7 +42,7 @@ const {height, width} = Dimensions.get('window');
 
 //Importing Icons
 import {UserIcon, MailIcon, LockIcon, PhoneIcon} from '../constant/icons';
-import {HomeScreen} from '.';
+import {HomeScreen} from './HomeScreen';
 
 export default class SignupScreen extends React.Component {
   state = {
@@ -34,21 +56,26 @@ export default class SignupScreen extends React.Component {
 
   async componentDidMount() {
     const user = await AsyncStorageData.getItem('UserValue');
-    console.log('Name: =>', user);
-    console.log('Name', this.state.Credentials);
-    this.setState({
-      Credentials: user,
-    });
+    console.log('SIGNUP: ==>>', user);
+    console.log('Credentials', this.state.Credentials);
+    this.setting(user);
   }
+  setting = user => {
+    this.setState({
+      Credential: user,
+    });
+  };
+
   _handlePress = async () => {
     const {name, email, phone, password, Repassword} = this.state;
+
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (
-      name.length === '' ||
-      email.length === '' ||
-      phone.length === '' ||
-      password.length === '' ||
-      Repassword.length === ''
+      name.length == '' ||
+      email.length == '' ||
+      phone.length == '' ||
+      password.length == '' ||
+      Repassword.length == ''
     ) {
       Alert.alert('Information!', 'Please fill all fields');
     } else if (reg.test(email) === false) {
@@ -69,20 +96,18 @@ export default class SignupScreen extends React.Component {
       console.log('UserValue =>', JSON.stringify(USER_DATA));
       await AsyncStorageData.setItem('UserValue', JSON.stringify(USER_DATA));
 
-      const user = await AsyncStorageData.getItem('UserValue');
-      this.setState({
-        Credentials: user,
-      });
-      this.props.navigation.navigate('Home', {
-        user_name: USER_DATA.name,
-        email_id: USER_DATA.email,
-      });
+      // const user = await AsyncStorageData.getItem('UserValue');
+      // this.setState({
+      //   Credentials: user,
+      // });
+      this.props.navigation.navigate('Home');
       this.setState({
         name: '',
         email: '',
         phone: '',
         password: '',
         Repassword: '',
+        focus: false,
       });
     }
   };
@@ -103,7 +128,7 @@ export default class SignupScreen extends React.Component {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : null}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
-        style={styles.container}>
+        style={[styles.container, this.focus ? styles.BorderHighlight : null]}>
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.container2}>
@@ -113,28 +138,21 @@ export default class SignupScreen extends React.Component {
           </Text>
 
           <View>
-            <View style={styles.InputContainer}>
+            <View>
               <Image style={styles.icons} source={UserIcon} />
               <TextInput
-                onBlur={() => this.onBlur()}
-                onFocus={() => this.onFocus()}
-                style={[
-                  styles.TextInputContainer,
-                  {
-                    borderColor: this.state.borderColor,
-                    color: this.state.color,
-                    borderWidth: 3,
-                  },
-                ]}
+                style={styles.TextInputContainer}
                 placeholder="Jhone Williams"
                 value={this.state.name}
+                onFocus={() => this.setState({focus: true})}
+                onBlur={() => this.setState({focus: false})}
                 onChangeText={text => {
                   this.setState({name: text});
                 }}
               />
             </View>
 
-            <View style={styles.InputContainer}>
+            <View>
               <Image style={styles.icons} source={MailIcon} />
               <TextInput
                 style={styles.TextInputContainer}
@@ -146,7 +164,7 @@ export default class SignupScreen extends React.Component {
               />
             </View>
 
-            <View style={styles.InputContainer}>
+            <View>
               <Image style={styles.icons} source={PhoneIcon} />
               <TextInput
                 style={styles.TextInputContainer}
@@ -159,7 +177,7 @@ export default class SignupScreen extends React.Component {
               />
             </View>
 
-            <View style={styles.InputContainer}>
+            <View>
               <Image style={styles.icons} source={LockIcon} />
               <TextInput
                 secureTextEntry={true}
@@ -172,7 +190,7 @@ export default class SignupScreen extends React.Component {
               />
             </View>
 
-            <View style={styles.InputContainer}>
+            <View>
               <Image style={styles.icons} source={LockIcon} />
               <TextInput
                 secureTextEntry={true}
@@ -210,6 +228,11 @@ const styles = StyleSheet.create({
   },
   container2: {
     flex: 1,
+  },
+  BorderHighlight: {
+    borderColor: 'red',
+    borderWidth: 3,
+    backgroundColor: 'red',
   },
   heading: {
     marginTop: 80,
