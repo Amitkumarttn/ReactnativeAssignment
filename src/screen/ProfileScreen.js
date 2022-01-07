@@ -13,25 +13,37 @@ import {
   Alert,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {AvatarEditIcon} from '../constant';
+import {AvatarEditIcon, SaveIcon, EditIcon} from '../constant';
 
 const {height, width} = Dimensions.get('window');
 class ProfileScreen extends Component {
   state = {
     object: this.props.route.params,
+    id: this.props.route.params.id,
     first_name: this.props.route.params.first_name,
     last_name: this.props.route.params.last_name,
     email: this.props.route.params.email,
-    username: '',
-    password: '',
+    avatar: this.props.route.params.avatar,
+    username: '@Example.com',
+    password: 'something',
     date: '15',
     month: 'May',
     year: '1995',
+    isEdit: true,
+    isSave: false,
+    handleFirstNameEditable: false,
+    handleLastNameEditable: false,
   };
   handlePress = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const {email, username, password} = this.state;
-    if (email === '' || username === '' || password === '') {
+    const {first_name, last_name, email, username, password} = this.state;
+    if (
+      email === '' ||
+      username === '' ||
+      password === '' ||
+      first_name === '' ||
+      last_name === ''
+    ) {
       Alert.alert('Information', 'Required all fields');
     } else if (reg.test(email) === false) {
       Alert.alert('Information!', 'Email ID is not Valid');
@@ -57,6 +69,22 @@ class ProfileScreen extends Component {
       return true;
     }
   };
+  handleEditIcon = () => {
+    this.setState({
+      isEdit: false,
+      isSave: true,
+      handleFirstNameEditable: true,
+      handleLastNameEditable: true,
+    });
+  };
+  handleSaveIcon = () => {
+    this.setState({
+      isEdit: true,
+      isSave: false,
+      handleFirstNameEditable: false,
+      handleLastNameEditable: false,
+    });
+  };
   render() {
     return (
       <KeyboardAvoidingView
@@ -64,12 +92,36 @@ class ProfileScreen extends Component {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 132 : 0}
         style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Image style={styles.icon} source={AvatarEditIcon} />
-          <Text style={styles.name}>Some Name</Text>
-          <Text style={styles.post}>Senior Designer</Text>
+          {this.state.avatar ? (
+            <Image
+              style={styles.avatarIcon}
+              source={{uri: this.state.avatar}}
+            />
+          ) : (
+            <Image style={styles.avatarIcon} source={AvatarEditIcon} />
+          )}
+          {this.state.isEdit ? (
+            <TouchableOpacity
+              onPress={() => this.handleEditIcon()}
+              style={styles.editIconContainer}>
+              <Image style={styles.icons} source={EditIcon} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => this.handleSaveIcon()}
+              style={styles.editIconContainer}>
+              <Image style={styles.icons} source={SaveIcon} />
+            </TouchableOpacity>
+          )}
           <View style={styles.TextInputContainer}>
             <TextInput
-              style={styles.TextInput}
+              focusable
+              editable={this.state.handleFirstNameEditable}
+              style={
+                this.state.handleFirstNameEditable
+                  ? styles.TextEditInput
+                  : styles.firstNameTextInput
+              }
               placeholder="First Name"
               value={this.state.first_name}
               onChangeText={text => {
@@ -77,7 +129,12 @@ class ProfileScreen extends Component {
               }}
             />
             <TextInput
-              style={styles.TextInput}
+              editable={this.state.handleLastNameEditable}
+              style={
+                this.state.handleLastNameEditable
+                  ? styles.TextEditInput
+                  : styles.lastNameTextInput
+              }
               placeholder="Last Name"
               value={this.state.last_name}
               onChangeText={text => {
@@ -139,7 +196,7 @@ class ProfileScreen extends Component {
           <TouchableOpacity
             style={styles.ButtonContainer}
             onPress={this.handlePress}>
-            <Text style={styles.Btn}>CREATE</Text>
+            <Text style={styles.Btn}>UPDATE</Text>
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -147,12 +204,8 @@ class ProfileScreen extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {data: state.date};
-// };
 const mapStateToProps = state => {
   const props = {data: state.dataVal.arrData};
-  console.log(state.dataVal.arrData);
   return props;
 };
 const mapDispatchToProps = dispatch => {
@@ -168,24 +221,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  icon: {
-    width: 90,
-    height: 90,
+  avatarIcon: {
+    width: 120,
+    height: 120,
+    borderRadius: 80,
     marginVertical: 20,
     alignSelf: 'center',
   },
-  name: {
-    fontSize: 22,
-    fontWeight: 'bold',
+  editIconContainer: {
+    position: 'absolute',
+    marginVertical: 110,
     alignSelf: 'center',
+    backgroundColor: '#4B95CD',
+    padding: 8,
+    borderRadius: 50,
   },
-  post: {
-    fontSize: 15,
-    color: '#888',
-    alignSelf: 'center',
+  icons: {
+    width: 20,
+    height: 20,
+    tintColor: '#eee',
   },
   TextInputContainer: {
-    marginVertical: 20,
+    marginVertical: -10,
   },
   TextInput: {
     width: width - 50,
@@ -195,6 +252,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 50,
     marginBottom: 18,
+  },
+  firstNameTextInput: {
+    width: width - 250,
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
+    marginTop: Platform.OS === 'android' ? -15 : null,
+    marginBottom: Platform.OS === 'android' ? -21 : null,
+  },
+  TextEditInput: {
+    width: width - 250,
+    alignSelf: 'center',
+    fontSize: 20,
+    borderColor: '#888',
+    borderBottomWidth: 1,
+    marginBottom: 30,
+  },
+  lastNameTextInput: {
+    width: width - 250,
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontSize: 15,
+    color: '#888',
+    marginBottom: Platform.OS === 'ios' ? 30 : null,
   },
   dobContainer: {
     flexDirection: 'row',
@@ -210,13 +293,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   ButtonContainer: {
-    backgroundColor: 'blue',
+    backgroundColor: '#4B95CD',
     width: width - 220,
     height: 50,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    marginTop: 30,
   },
   Btn: {
     color: '#fff',

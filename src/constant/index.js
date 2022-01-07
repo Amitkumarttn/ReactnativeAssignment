@@ -6,3 +6,6 @@ export {default as GridIcon} from '../assets/icons/icons8-grid-64.png';
 export {default as ListIcon} from '../assets/icons/icons8-menu-90.png';
 export {default as AvatarEditIcon} from '../assets/icons/edit.png';
 export {default as DeleteIcon} from '../assets/icons/close.png';
+export {default as EditIcon} from '../assets/icons/icons8-edit-150.png';
+export {default as SaveIcon} from '../assets/icons/icons8-done-96.png';
+

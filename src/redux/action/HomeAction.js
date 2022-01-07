@@ -11,7 +11,16 @@ const middlewareFunction = (dispatch, getState) => {
   fetch('https://reqres.in/api/users')
     .then(response => response.json())
     .then(data => {
-      dispatch({type: 'IS_SUCCESS', payload: data});
+      let userData = data.data.sort((x, y) => {
+        if (x.first_name < y.first_name) {
+          return -1;
+        }
+        if (x.first_name > y.first_name) {
+          return 1;
+        }
+        return 0;
+      });
+      dispatch({type: 'IS_SUCCESS', payload: userData});
     })
     .catch(error => {
       dispatch({type: 'IS_FAILURE', payload: error});

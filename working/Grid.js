@@ -15,9 +15,6 @@ import {
 import {connect} from 'react-redux';
 import {getData} from '../redux/action/HomeAction';
 import {DeleteIcon} from '../constant';
-import * as Animatable from 'react-native-animatable';
-import Realm from 'realm';
-import UserSchema from '../database/UserSchema';
 
 class GridViewScreen extends Component {
   state = {
@@ -33,7 +30,7 @@ class GridViewScreen extends Component {
       deleteIcon: true,
     });
   };
-  deleteAction = index => {
+  deleteAction = () => {
     Alert.alert('Hold on!', 'Are you sure you want to Delete this?', [
       {
         text: 'Cancel',
@@ -43,8 +40,7 @@ class GridViewScreen extends Component {
       {
         text: 'Yes',
         onPress: () => {
-          this.props.deleteUser(index);
-          this.setState({deleteIcon: false});
+          Alert.alert('Successful', 'Deleted');
         },
       },
     ]);
@@ -54,32 +50,29 @@ class GridViewScreen extends Component {
   handlePress = item => {
     this.props.navigation.navigate('Profile', item);
   };
-  listItem = ({item, index}) => (
-    <Animatable.View animation="fadeInUp" duration={100} delay={index * 200}>
-      <TouchableOpacity
-        style={styles.item}
-        onLongPress={() => this.deleteActionIcon()}
-        onPress={() => this.handlePress(item)}>
-        {this.state.deleteIcon ? (
-          <TouchableOpacity
-            style={styles.deleteIconContainer}
-            onPress={() => this.deleteAction(index)}>
-            <Image style={styles.DeleteIcon} source={DeleteIcon} />
-          </TouchableOpacity>
-        ) : null}
-        <Image style={styles.avatar} source={{uri: item.avatar}} />
-        <Text style={styles.name}>
-          {[item.first_name, ' ', item.last_name]}
-        </Text>
-      </TouchableOpacity>
-    </Animatable.View>
+  listItem = ({item}) => (
+    <TouchableOpacity
+      style={styles.item}
+      onLongPress={() => this.deleteActionIcon()}
+      onPress={() => this.handlePress(item)}>
+      {this.state.deleteIcon ? (
+        <TouchableOpacity
+          style={styles.deleteIconContainer}
+          onPress={() => this.deleteAction()}>
+          <Image style={styles.DeleteIcon} source={DeleteIcon} />
+        </TouchableOpacity>
+      ) : null}
+      <Image style={styles.avatar} source={{uri: item.avatar}} />
+      <Text style={styles.name}>{[item.first_name, ' ', item.last_name]}</Text>
+    </TouchableOpacity>
   );
   render() {
     const {data} = this.props;
+    console.log(this.state.dataSource);
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
-          data={data}
+          data={data.data}
           numColumns={2}
           renderItem={this.listItem}
           keyExtractor={item => item.id}
@@ -91,13 +84,13 @@ class GridViewScreen extends Component {
 
 const mapStateToProps = state => {
   const props = {data: state.dataVal.arrData};
+  console.log(state.dataVal.arrData);
   return props;
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchApi: () => getData(dispatch),
-    deleteUser: index => dispatch({type: 'DELETE_USER', payload: index}),
   };
 };
 

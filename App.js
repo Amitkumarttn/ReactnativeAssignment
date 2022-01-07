@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import {Provider} from 'react-redux';
+import UserSchema from './src/database/UserSchema';
 import store from './src/redux/store';
 
 import NavigationBar from './src/routes/NavigationBar';
@@ -19,6 +20,5 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
 });
